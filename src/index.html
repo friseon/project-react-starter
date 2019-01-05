@@ -3,14 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <title>Hello React!</title>
-        <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+        <!-- Styles -->
+        <% if (htmlWebpackPlugin.options.env === "production") { %>
+            <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+        <%}%>
     </head>
     <body>
-        <div id="example"></div>
+        <div id="app"></div>
 
         <!-- Dependencies -->
-        <script src="../node_modules/react/umd/react.development.js"></script>
-        <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+        <% if (htmlWebpackPlugin.files.chunks.vendor) { %>
+            <script src="<%= htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
+        <%} else {%>
+            <script src="../node_modules/react/umd/react.development.js"></script>
+            <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+        <%}%>
 
         <!-- Main -->
         <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>

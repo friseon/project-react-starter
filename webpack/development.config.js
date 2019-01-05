@@ -1,31 +1,63 @@
 const path = require('path');
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
+
+// params
+const OUTPUT_PATH = '../dist';
+const SOURCE_PATH = '../src';
 
 module.exports = {
+    mode: 'development',
+
     plugins: [
-        new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
-            filename: "style.css"
-        }),
+        new HotModuleReplacementPlugin(),
+        // turbo-build (but has some troubles in hot-reload :( )
+        new HardSourceWebpackPlugin(),
         new HtmlWebpackPlugin({
+            env: 'development',
             inject: false,
-            hash: true,
             template: './src/index.html',
             filename: 'index.html'
         })
     ],
 
-    entry: "./src/index.tsx",
+    entry: {
+        main: path.join(__dirname, SOURCE_PATH, 'index.tsx'),
+        // property – vendor's name
+        // vendor: ['react', 'react-dom']
+    },
+
+    optimization: {
+        minimize: false,
+        noEmitOnErrors: true,
+        moduleIds: 'hashed',
+        removeAvailableModules: false,
+        removeEmptyChunks: false,
+        mergeDuplicateChunks: false,
+        splitChunks: {
+            cacheGroups: {
+                // vendor chunk
+                vendor: {
+                    // sync + async chunks
+                    chunks: 'all',
+                    name: 'vendor',
+                    // test: 'vendor',
+                    // import file path containing node_modules
+                    test: /node_modules/
+                }
+            }
+        }
+    },
+
     output: {
-        filename: "bundle.js",
-        path: path.join(__dirname, '../dist'),
+        filename: "[name].js",
+        path: path.join(__dirname, OUTPUT_PATH),
     },
 
     // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+    devtool: "inline-source-map",
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
@@ -34,11 +66,45 @@ module.exports = {
 
     module: {
         rules: [
-            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader' or 'babel-loader'.
+            {
+                test: /\.tsx?$/,
+                // use: ['awesome-typescript-loader'],
+                use: [
+                    {
+                        loader: 'cache-loader',
+                        options: {
+                            cacheDirectory: path.join(__dirname, "../node_modules", ".cache", "cache-loader")
+                        }
+                    },
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
+                ]
+            },
 
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader' or 'babel-loader'.
+            {
+                test: /\.js$/,
+                enforce: "pre",
+                use: [
+                    {
+                        loader: 'cache-loader',
+                        options: {
+                            cacheDirectory: path.join(__dirname, "../node_modules", ".cache", "cache-loader")
+                        }
+                    },
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true
+                        }
+                    }
+                ]
+            },
 
             {
                 test: /\.scss$/,
@@ -47,7 +113,13 @@ module.exports = {
                         loader: "style-loader"
                     },
                     {
-                        loader: "css-loader"
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                            sourceMap: true,
+                            localIdentName: "[local]_[hash:base64:8]" //[name][local]
+                        }
                     },
                     {
                         loader: 'postcss-loader'
@@ -64,8 +136,17 @@ module.exports = {
     // assume a corresponding global variable exists and use that instead.
     // This is important because it allows us to avoid bundling all of our
     // dependencies, which allows browsers to cache those libraries between builds.
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+    // externals: {
+    //     "react": "React",
+    //     "react-dom": "ReactDOM"
+    // },
+
+    devServer: {
+        stats: 'errors-only',
+        host: 'localhost',
+        port: 8080,
+        contentBase: path.join(__dirname, OUTPUT_PATH),
+        historyApiFallback: true,
+        publicPath: '/',
     }
 };

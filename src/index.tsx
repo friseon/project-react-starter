@@ -1,9 +1,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { BrowserRouter } from 'react-router-dom';
 
-import { Hello } from "./components/Hello";
+import { applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+
+import reducers from './reducers';
+import configureStore from './store';
+
+import { App } from "./components/app";
+
+import styles from './index.scss';
+
+const store = configureStore();
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
-    document.getElementById("example")
+    <Provider store={store}>
+        <BrowserRouter>
+            <App compiler="" framework=""/>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById("app")
 );

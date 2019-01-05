@@ -1,5 +1,15 @@
 {
     "presets": [
-        "env"
-    ]
+        // ["es2015", { "modules": false }],
+        "@babel/react",
+        "@babel/typescript",
+        [
+            "@babel/preset-env",
+            {
+                "modules": false,
+                "loose": true,
+            }
+        ]
+    ],
+    "plugins": ["transform-class-properties"]
 }
