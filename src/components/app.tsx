@@ -1,14 +1,14 @@
-import * as React from "react";
-import { Switch, Route, Link } from 'react-router-dom';
+import * as React from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 
 import Button from './button';
 import Field from './field';
 
 import styles from './app.scss';
 
-interface HelloProps { compiler: string; framework: string; }
+interface IHelloProps { compiler: string; framework: string; }
 
-class App extends React.Component<HelloProps, {}> {
+class App extends React.Component<IHelloProps, {}> {
     render() {
         return (
             <main>
@@ -20,16 +20,16 @@ class App extends React.Component<HelloProps, {}> {
                     </h1>
                     <nav>
                         <ul>
-                            <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/button'>button</Link></li>
-                            <li><Link to='/field'>field</Link></li>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/button">button</Link></li>
+                            <li><Link to="/field">field</Link></li>
                         </ul>
                     </nav>
                 </header>
                 <Switch>
-                    <Route exact path='/' render={ ()=><Field placeholder='main!' /> } />
-                    <Route path='/button' component={Button}/>
-                    <Route path='/field' render={ ()=><Field placeholder='I like dev tools!' /> } />
+                    <Route exact path="/" render={ () => <Field placeholder="main!" /> } />
+                    <Route path="/button" component={Button}/>
+                    <Route path="/field" render={ () => <Field placeholder="I like dev tools!" /> } />
                 </Switch>
             </main>
         );
@@ -37,5 +37,5 @@ class App extends React.Component<HelloProps, {}> {
 }
 
 export {
-    App
-}
+    App,
+};

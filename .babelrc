@@ -1,6 +1,5 @@
 {
     "presets": [
-        // ["es2015", { "modules": false }],
         "@babel/react",
         "@babel/typescript",
         [

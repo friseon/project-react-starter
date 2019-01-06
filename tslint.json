@@ -1,0 +1,41 @@
+{
+    "extends": [ "tslint:latest", "tslint:recommended" ],
+    "linterOptions": {
+        "exclude": [
+            "./node_modules/**",
+            "node_modules"
+        ]
+    },
+    "rules": {
+        "max-line-length": {
+            "options": [120]
+        },
+        "member-access": [true, "no-public"],
+        "quotemark": [true, "single", "jsx-double"],
+        "ordered-imports": false,
+        "no-trailing-whitespace": [true, "ignore-comments"],
+        "no-bitwise": false,
+        "new-parens": true,
+        "no-arg": true,
+        "object-literal-sort-keys": false,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false,
+        "no-implicit-dependencies": [true, "dev"],
+        "no-console": {
+            "severity": "warning",
+            "options": [
+                "debug",
+                "info",
+                "log",
+                "time",
+                "timeEnd",
+                "trace"
+            ]
+        }
+    },
+    "jsRules": {
+        "max-line-length": {
+            "options": [120]
+        }
+    }
+}

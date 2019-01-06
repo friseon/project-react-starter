@@ -1,0 +1,11 @@
+{
+    "extends": "airbnb/base",
+    "env": {
+        "browser": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "react/jsx-filename-extension": [ 1, { "extensions": [".js"] } ],
+        "indent": ["error", 4]
+    }
+}

@@ -4,5 +4,5 @@ import button from './button';
 
 export default combineReducers({
     field,
-    button
+    button,
 });

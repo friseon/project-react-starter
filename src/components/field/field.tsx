@@ -8,12 +8,12 @@ import { set, focus, blur } from '../../reducers/field';
  * в свойствах компонента. Это свойство добавляет connect, вызванный с одним 
  * аргументом (без mapDispatchToProps) 
  */
-interface FieldProps extends React.HTMLProps<HTMLInputElement> {
+interface IFieldProps extends React.HTMLProps<HTMLInputElement> {
     value?: string;
     placeholder?: string;
 }
 
-class Field extends React.Component<DispatchProp & FieldProps, {}> {
+class Field extends React.Component<DispatchProp & IFieldProps, {}> {
     handleChange = (event: React.FormEvent<HTMLInputElement>) => {
         const { dispatch } = this.props;
         const value = event.currentTarget.value;
@@ -58,8 +58,8 @@ class Field extends React.Component<DispatchProp & FieldProps, {}> {
  * Стандартная сигнатура mapStateToProps, и благодаря (в очередной раз) 
  * интерфейсам мы пользуемся автоподбором всех свойств аргументов
  */
-const mapStateToProps = (state: IStore, ownProps: FieldProps) => ({
-    value: state.field.value
+const mapStateToProps = (state: IStore, ownProps: IFieldProps) => ({
+    value: state.field.value,
 });
 
 /**
@@ -76,4 +76,4 @@ const mapStateToProps = (state: IStore, ownProps: FieldProps) => ({
   * На практике, достаточно указать дженерику два первых пустых объекта, 
   * и в третий аргумент отправить единый интерфейс свойств компонента.
   */
-export default connect<{}, {}, FieldProps>(mapStateToProps)(Field);
+export default connect<{}, {}, IFieldProps>(mapStateToProps)(Field);

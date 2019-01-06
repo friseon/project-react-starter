@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from '../reducers';
-import { FieldState } from '../reducers/field';
-import { ButtonState } from '../reducers/button';
+import { IFieldState } from '../reducers/field';
+import { IButtonState } from '../reducers/button';
 
 /**
  * Интерфейс хранилища будет использоваться в каждом mapStateToProps, 
@@ -12,8 +12,8 @@ import { ButtonState } from '../reducers/button';
  * (например, в асинхронных действиях с redux-thunk)
  */
 export interface IStore {
-    field: FieldState;
-    button: ButtonState;
+  field: IFieldState;
+    button: IButtonState;
 }
 
 /**
@@ -24,9 +24,9 @@ const configureStore = (initialState?: IStore) => {
         rootReducer,
         initialState, // applyMiddleware(thunk),
         composeWithDevTools(
-            applyMiddleware(thunk)
-        )
-    )
+            applyMiddleware(thunk),
+        ),
+    );
 };
 
 export default configureStore;

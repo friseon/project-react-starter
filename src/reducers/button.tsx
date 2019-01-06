@@ -4,15 +4,15 @@
  * Для начала определим интерфейс этого кусочка хранилища, 
  * и создадим объект с начальным состоянием.
  */
-export interface ButtonState {
+export interface IButtonState {
     value: number;
     text: string;
 }
 
-const initialState: ButtonState = {
+const initialState: IButtonState = {
     value: 0,
-    text: 'default'
-}
+    text: 'default',
+};
 
 /**
  * Constants
@@ -30,12 +30,12 @@ type CLICK = typeof CLICK;
  * Используя Redux с TypeScript, достаточно определить интерфейс возможных 
  * действий, и определить общий тип (ButtonAction) для редьюсера
  */
-export interface SetAction {
+export interface ISetAction {
     type: CLICK;
     text: string;
 }
 
-type ButtonAction = SetAction;
+type ButtonAction = ISetAction;
 
 /** 
  * Reducer
@@ -47,13 +47,13 @@ type ButtonAction = SetAction;
  * интерфейсам в каждом условном блоке (например case SET) мы знаем 
  * точное содержимое аргумента action.
  */
-export default function reducer(state: ButtonState = initialState, action: ButtonAction): ButtonState {
+export default function reducer(state: IButtonState = initialState, action: ButtonAction): IButtonState {
     switch (action.type) {
         case CLICK:
             return {
                 ...state,
-                text: action.text
-            }
+                text: action.text,
+            };
         default:
             return state;
     }
@@ -67,7 +67,7 @@ export default function reducer(state: ButtonState = initialState, action: Butto
  * конкретного действия, мы не отправим неправильные данные в 
  * хранилище.
  */
-export const click = (text: string): SetAction => ({
+export const click = (text: string): ISetAction => ({
     type: CLICK,
-    text
+    text,
 });

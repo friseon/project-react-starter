@@ -4,15 +4,15 @@
  * Для начала определим интерфейс этого кусочка хранилища, 
  * и создадим объект с начальным состоянием.
  */
-export interface FieldState {
+export interface IFieldState {
     value: string;
     focus: boolean;
 }
 
-const initialState: FieldState = {
+const initialState: IFieldState = {
     value: '',
-    focus: false
-}
+    focus: false,
+};
 
 /**
  * Constants
@@ -36,20 +36,20 @@ type BLUR = typeof BLUR;
  * Используя Redux с TypeScript, достаточно определить интерфейс возможных 
  * действий, и определить общий тип (FieldAction) для редьюсера
  */
-export interface SetAction {
+export interface ISetAction {
     type: SET;
     payload: string;
 }
 
-export interface FocusAction {
+export interface IFocusAction {
     type: FOCUS;
 }
 
-export interface BlurAction {
+export interface IBlurAction {
     type: BLUR;
 }
 
-type FieldAction = SetAction | FocusAction | BlurAction;
+type FieldAction = ISetAction | IFocusAction | IBlurAction;
 
 /** 
  * Reducer
@@ -61,23 +61,23 @@ type FieldAction = SetAction | FocusAction | BlurAction;
  * интерфейсам в каждом условном блоке (например case SET) мы знаем 
  * точное содержимое аргумента action.
  */
-export default function reducer(state: FieldState = initialState, action: FieldAction): FieldState {
+export default function reducer(state: IFieldState = initialState, action: FieldAction): IFieldState {
     switch (action.type) {
         case SET:
             return {
                 ...state,
-                value: action.payload
-            }
+                value: action.payload,
+            };
         case FOCUS:
             return {
                 ...state,
-                focus: true
-            }
+                focus: true,
+            };
         case BLUR:
             return {
                 ...state,
-                focus: false
-            }
+                focus: false,
+            };
         default:
             return state;
     }
@@ -91,11 +91,11 @@ export default function reducer(state: FieldState = initialState, action: FieldA
  * конкретного действия, мы не отправим неправильные данные в 
  * хранилище.
  */
-export const set = (payload: string): SetAction => ({
+export const set = (payload: string): ISetAction => ({
     type: SET,
-    payload
+    payload,
 });
 
-export const focus = (): FocusAction => ({ type: FOCUS });
+export const focus = (): IFocusAction => ({ type: FOCUS });
 
-export const blur = (): BlurAction => ({ type: BLUR });
+export const blur = (): IBlurAction => ({ type: BLUR });

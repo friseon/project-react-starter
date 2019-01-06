@@ -1,21 +1,21 @@
-import * as React from "react";
+import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import { click, ButtonState as F } from '../../reducers/button';
+import { click, IButtonState as F } from '../../reducers/button';
 import { IStore } from '../../store';
 
 import styles from './button.scss';
 
-interface ButtonProps {
+interface IButtonProps {
     text?: string;
     buttonText?: string;
     fieldValue?: string;
 }
 
-interface ButtonState {
+interface IButtonState {
     text: string;
 }
 
-export class Button extends React.Component<DispatchProp & ButtonProps, ButtonState> {
+export class Button extends React.Component<DispatchProp & IButtonProps, IButtonState> {
     handleClick = (event: React.FormEvent<HTMLButtonElement>) => {
         const { dispatch } = this.props;
         const value = this.props.fieldValue;
@@ -36,9 +36,9 @@ export class Button extends React.Component<DispatchProp & ButtonProps, ButtonSt
     }
 }
 
-const mapStateToProps = (state: IStore, ownProps: ButtonProps) => ({
+const mapStateToProps = (state: IStore, ownProps: IButtonProps) => ({
     fieldValue: state.field.value,
-    buttonText: state.button.text
+    buttonText: state.button.text,
 });
 
-export default connect<{}, {}, ButtonProps>(mapStateToProps)(Button);
+export default connect<{}, {}, IButtonProps>(mapStateToProps)(Button);
