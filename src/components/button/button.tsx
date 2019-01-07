@@ -30,7 +30,7 @@ export class Button extends React.Component<DispatchProp & IButtonProps, IButton
     render() {
         return (
             <button className={styles.header} onClick={this.handleClick}>
-            { this.props.buttonText }
+                { this.props.buttonText }
             </button>
         );
     }

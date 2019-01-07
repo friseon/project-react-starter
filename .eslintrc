@@ -1,11 +1,21 @@
 {
-    "extends": "airbnb/base",
+    "extends": [
+        "airbnb/base",
+        "typescript"
+    ],
     "env": {
         "browser": true
     },
-    "parser": "babel-eslint",
+    "parser": "typescript-eslint-parser",
+    "plugins": ["typescript"],
     "rules": {
-        "react/jsx-filename-extension": [ 1, { "extensions": [".js"] } ],
-        "indent": ["error", 4]
+        "react/jsx-filename-extension": [0, { "extensions": [".jsx", ".tsx", ".ts", ".js"] }],
+        "typescript/interface-name-prefix": 0,
+        "import/extensions": false,
+        "import/no-unresolved": false,
+        "valid-jsdoc": 1,
+        "typescript/explicit-function-return-type": 1,
+        "typescript/explicit-member-accessibility": 1,
+        "indent": ["error", 4, { "SwitchCase": 1 }]
     }
 }

@@ -8,7 +8,7 @@ import styles from './app.scss';
 
 interface IHelloProps { compiler: string; framework: string; }
 
-class App extends React.Component<IHelloProps, {}> {
+export default class App extends React.Component<IHelloProps, {}> {
     render() {
         return (
             <main>
@@ -35,7 +35,3 @@ class App extends React.Component<IHelloProps, {}> {
         );
     }
 }
-
-export {
-    App,
-};

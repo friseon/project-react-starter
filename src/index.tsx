@@ -8,9 +8,7 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import configureStore from './store';
 
-import { App } from './components/app';
-
-import styles from './index.scss';
+import App from './components/app';
 
 const store = configureStore();
 

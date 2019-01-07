@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -12,7 +12,7 @@ import { IButtonState } from '../reducers/button';
  * (например, в асинхронных действиях с redux-thunk)
  */
 export interface IStore {
-  field: IFieldState;
+    field: IFieldState;
     button: IButtonState;
 }
 
@@ -22,7 +22,7 @@ export interface IStore {
 const configureStore = (initialState?: IStore) => {
     return createStore(
         rootReducer,
-        initialState, // applyMiddleware(thunk),
+        initialState,
         composeWithDevTools(
             applyMiddleware(thunk),
         ),
