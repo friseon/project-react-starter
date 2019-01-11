@@ -48,14 +48,15 @@ module.exports = {
         ],
         splitChunks: {
             cacheGroups: {
-                // vendor chunk
+                // vendor chunk - only js
                 vendor: {
                     // sync + async chunks
                     chunks: 'all',
                     name: 'vendor',
                     // test: 'vendor',
                     // import file path containing node_modules
-                    test: /node_modules/
+                    // test: /node_modules/
+                    test: /\/node_modules\/[\w\/.]+\.js$/
                 }
             }
         }
@@ -87,16 +88,25 @@ module.exports = {
             },
 
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
+                include: [/node_modules/],
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
                         loader: "css-loader",
                         options: {
-                            importLoaders: 1,
-                            modules: true,
-                            localIdentName: "[hash:base64:12]" //[name][local]
+                            modules: false
                         }
+                    }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                exclude: [/node_modules/],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader"
                     },
                     {
                         loader: 'postcss-loader'
@@ -105,7 +115,27 @@ module.exports = {
                         loader: "sass-loader"
                     }
                 ]
-            }
+            },
+
+            {
+                test: /\.(png|jp?g|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use : [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'assets/svg/',
+                    }
+                }]
+            },
+
+            {
+                test: /\.(woff|woff2|eot|ttf)?$/,
+                loader: 'file-loader',
+                options: {
+                    name: "[name].[ext]",
+                    outputPath: 'assets/fonts/',
+                }
+            },
         ]
     }
 };

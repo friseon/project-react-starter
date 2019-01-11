@@ -107,7 +107,21 @@ module.exports = {
             },
 
             {
+                test: /\.s?css$/,
+                include: [/node_modules/],
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: false
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.scss$/,
+                exclude: [/node_modules/],
                 use: [
                     {
                         loader: "style-loader"
@@ -128,7 +142,27 @@ module.exports = {
                         loader: "sass-loader"
                     }
                 ]
-            }
+            },
+
+            {
+                test: /\.(png|jp?g|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use : [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'assets/svg/',
+                    }
+                }]
+            },
+
+            {
+                test: /\.(woff|woff2|eot|ttf)?$/,
+                loader: 'file-loader',
+                options: {
+                    name: "[name].[ext]",
+                    outputPath: 'assets/fonts/',
+                }
+            },
         ]
     },
 
