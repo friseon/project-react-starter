@@ -1,32 +1,26 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, Middleware, applyMiddleware, compose, StoreEnhancer } from 'redux';
+import { History } from 'history';
+import { routerMiddleware, RouterState } from 'connected-react-router';
 
-import rootReducer from '../reducers';
-import { IFieldState } from '../reducers/field';
-import { IButtonState } from '../reducers/button';
+import { rootReducer } from './reducers';
 
-/**
- * Интерфейс хранилища будет использоваться в каждом mapStateToProps, 
- * и в остальных местах, где мы напрямую получаем состояние хранилища 
- * (например, в асинхронных действиях с redux-thunk)
- */
-export interface IStore {
-    field: IFieldState;
-    button: IButtonState;
+export interface State {
+    router?: RouterState,
 }
 
-/**
- * Этот же интерфейс указывается в качестве состояния при инициализации хранилища.
- */
-const configureStore = (initialState?: IStore) => {
+export const createAppStore = (initialState: State, history: History) => {
+    const enhancers: StoreEnhancer[] = [];
+    const middlewares: Middleware[] = [routerMiddleware(history)];
+
+    // if (process.env.NODE_ENV === 'development') {
+    //     if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__) {
+    //         enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__());
+    //     }
+    // }
+
     return createStore(
-        rootReducer,
+        rootReducer(history),
         initialState,
-        composeWithDevTools(
-            applyMiddleware(thunk),
-        ),
+        compose(applyMiddleware(...middlewares), ...enhancers)
     );
 };
-
-export default configureStore;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import { click, IButtonState as F } from '../../reducers/button';
-import { IStore } from '../../store';
+import { click, IButtonState as F } from '../../store/reducers/button';
+import { State } from '../../store';
 
 import styles from './button.scss';
 
@@ -36,9 +36,7 @@ export class Button extends React.Component<DispatchProp & IButtonProps, IButton
     }
 }
 
-const mapStateToProps = (state: IStore, ownProps: IButtonProps) => ({
-    fieldValue: state.field.value,
-    buttonText: state.button.text,
+const mapStateToProps = (state: State, ownProps: IButtonProps) => ({
 });
 
 export default connect<{}, {}, IButtonProps>(mapStateToProps)(Button);

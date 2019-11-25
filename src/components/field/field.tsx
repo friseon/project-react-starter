@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect, DispatchProp } from 'react-redux';
-import { IStore } from '../../store';
-import { set, focus, blur } from '../../reducers/field';
+import { State } from '../../store';
+import { set, focus, blur } from '../../store/reducers/field';
 
 /**
  * Наследование от DispatchProp указывает, что метод dispatch ожидается 
@@ -58,8 +58,7 @@ class Field extends React.Component<DispatchProp & IFieldProps, {}> {
  * Стандартная сигнатура mapStateToProps, и благодаря (в очередной раз) 
  * интерфейсам мы пользуемся автоподбором всех свойств аргументов
  */
-const mapStateToProps = (state: IStore, ownProps: IFieldProps) => ({
-    value: state.field.value,
+const mapStateToProps = (state: State, ownProps: IFieldProps) => ({
 });
 
 /**

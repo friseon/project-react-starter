@@ -1,22 +1,17 @@
-import * as React from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 
-import { applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history';
+import { createAppStore } from './store';
 
-import reducers from './reducers';
-import configureStore from './store';
+import { Application } from './components/application';
 
-import App from './components/app';
+const initialState = {};
 
-const store = configureStore();
+const history = createBrowserHistory();
+const store = createAppStore(initialState, history);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App compiler="" framework=""/>
-        </BrowserRouter>
-    </Provider>,
+    <Application history={history} store={store} />,
     document.getElementById('app'),
 );

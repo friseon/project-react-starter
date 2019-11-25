@@ -1,19 +1,46 @@
 {
     "compilerOptions": {
-        "lib": [
-            "es5",
-            "es6",
-            "dom"
-        ],
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
+        "module": "esnext",
+        "moduleResolution": "node",
         "target": "es5",
+
+        "strict": true,
+        "alwaysStrict": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+
+        "declaration": false,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "pretty": true,
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "sourceMap": true,
+
+        "lib": ["es6", "dom"],
+        "skipLibCheck": true,
+
+        "rootDir": "./src",
+
         "jsx": "react",
-        "moduleResolution": "node"
+
+        "allowJs": true
     },
     "include": [
-        "./src/**/*"
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }
