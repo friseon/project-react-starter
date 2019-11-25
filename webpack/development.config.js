@@ -127,13 +127,7 @@ module.exports = {
                         loader: "style-loader"
                     },
                     {
-                        loader: "css-loader",
-                        options: {
-                            importLoaders: 1,
-                            modules: true,
-                            sourceMap: true,
-                            localIdentName: "[local]_[hash:base64:8]" //[name][local]
-                        }
+                        loader: "css-loader"
                     },
                     {
                         loader: 'postcss-loader'
