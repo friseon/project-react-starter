@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import { Store } from 'redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider as ReduxProvider } from 'react-redux';
 import { History } from 'history';
 import { routes } from '../routes';
+
+import { Navigation } from './Navigation/Navigation';
 
 interface ApplicationProps {
     store: Store;
@@ -20,13 +22,8 @@ export const Application: FC<ApplicationProps> = ({ store, history }) => (
                     Hello
                     <span>span</span>
                 </h1>
-                <nav>
-                    <ul>
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/main'>Main</Link></li>
-                    </ul>
-                </nav>
             </header>
+            <Navigation />
             {routes.map(route => (
                 <Route key={String(route.path)} {...route} />
             ))}

@@ -13,6 +13,7 @@
         "typescript/interface-name-prefix": 0,
         "import/extensions": false,
         "import/no-unresolved": false,
+        "import/prefer-default-export": false,
         "valid-jsdoc": 1,
         "typescript/explicit-function-return-type": 1,
         "typescript/explicit-member-accessibility": 1,
