@@ -4,6 +4,7 @@ export enum CounterActionTypes {
     RESET = 'COUNTER:RESET',
     INCREMENT = 'COUNTER:INCREMENT',
     DECREMENT = 'COUNTER:DECREMENT',
+    SET = 'COUNTER:SET',
 }
 
 /**
@@ -20,7 +21,7 @@ export const resetCounter = (_?: void): ResetCounter => ({
 /**
  * INCREMENT
  *
- * Добавляет к счетчику +1
+ * Увеличивает счетчик на 1
  */
 export type IncrementCounter = FSAAction<CounterActionTypes.INCREMENT>;
 
@@ -28,4 +29,28 @@ export const incrementCounter = (_?: void): IncrementCounter => ({
     type: CounterActionTypes.INCREMENT,
 });
 
-export type CounterActions = ResetCounter | IncrementCounter;
+/**
+ * DECREMENT
+ *
+ * Уменьшает счетчик на 1
+ */
+export type DecrementCounter = FSAAction<CounterActionTypes.DECREMENT>;
+
+export const decrementCounter = (_?: void): DecrementCounter => ({
+    type: CounterActionTypes.DECREMENT,
+});
+
+
+/**
+ * SET
+ *
+ * Устанавливает счетчик на определенное значение
+ */
+export type SetCounter = FSAAction<CounterActionTypes.SET>;
+
+export const setCounter = (payload: any): SetCounter => ({
+    type: CounterActionTypes.SET,
+    payload: payload
+});
+
+export type CounterActions = ResetCounter | IncrementCounter | DecrementCounter | SetCounter;

@@ -69,17 +69,13 @@ module.exports = {
             // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader' or 'babel-loader'.
             {
                 test: /\.tsx?$/,
-                // use: ['awesome-typescript-loader'],
                 use: [
                     // {
-                    //     loader: 'ts-loader'
-                    // }
-                    {
-                        loader: 'cache-loader',
-                        options: {
-                            cacheDirectory: path.join(__dirname, "../node_modules", ".cache", "cache-loader")
-                        }
-                    },
+                    //     loader: 'cache-loader',
+                    //     options: {
+                    //         cacheDirectory: path.join(__dirname, "../node_modules", ".cache", "cache-loader")
+                    //     }
+                    // },
                     {
                         loader: 'babel-loader',
                         options: {

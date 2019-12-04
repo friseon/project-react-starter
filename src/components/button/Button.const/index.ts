@@ -1,3 +1,3 @@
 import { cn } from '../../../constants';
 
-export const cnCounter = cn('counter');
+export const cnButton = cn('button');

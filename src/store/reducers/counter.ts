@@ -25,7 +25,15 @@ export const counterReducer: CounterReducer = produce((draft, action) => {
             break;
 
         case CounterActionTypes.INCREMENT:
-            draft.value = draft.value + 1;
+            draft.value = Number(draft.value) + 1;
+            break;
+
+        case CounterActionTypes.DECREMENT:
+            draft.value = Number(draft.value) - 1;
+            break;
+
+        case CounterActionTypes.SET:
+            draft.value = payload;
             break;
 
         default:

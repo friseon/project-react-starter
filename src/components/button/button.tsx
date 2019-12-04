@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
+import { cnButton } from './Button.const';
 
 import './Button.scss';
 
 interface IButtonProps {
-    mix?: string;
+    className?: string;
     text?: string;
     onClick?: any;
 }
 
 export const Button: FC<IButtonProps> = (props: IButtonProps) => {
-    const { mix = '', onClick, text = 'Button'} = props;
-    const className = [String(mix), 'button'].join('');
+    const { onClick, text = '', className} = props;
 
     return (
-        <button className={className} onClick={onClick}>
+        <button className={cnButton({}, [className] )} onClick={onClick}>
             { text }
         </button>
     );
