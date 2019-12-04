@@ -71,6 +71,9 @@ module.exports = {
                 test: /\.tsx?$/,
                 // use: ['awesome-typescript-loader'],
                 use: [
+                    // {
+                    //     loader: 'ts-loader'
+                    // }
                     {
                         loader: 'cache-loader',
                         options: {

@@ -15,7 +15,7 @@
         "import/no-unresolved": false,
         "import/prefer-default-export": false,
         "valid-jsdoc": 1,
-        "typescript/explicit-function-return-type": 1,
+        "typescript/explicit-function-return-type": 0,
         "typescript/explicit-member-accessibility": 1,
         "indent": ["error", 4, { "SwitchCase": 1 }]
     }

@@ -2,20 +2,21 @@ import { createStore, Middleware, applyMiddleware, compose, StoreEnhancer } from
 import { History } from 'history';
 import { routerMiddleware, RouterState } from 'connected-react-router';
 import { WindowExtended } from '../typings/app';
+import { rootReducer } from './reducers';
+import { CounterState } from './reducers/Counter';
 
 declare var window: WindowExtended;
 
-import { rootReducer } from './reducers';
+export type AppState = ReturnType<typeof rootReducer>;
 
-export interface State {
-    router?: RouterState,
+export interface IAppState {
+    router?: RouterState;
+    counter: CounterState;
 }
 
-export const createAppStore = (initialState: State, history: History) => {
+export const createAppStore = (initialState: IAppState, history: History) => {
     const enhancers: StoreEnhancer[] = [];
     const middlewares: Middleware[] = [routerMiddleware(history)];
-
-    console.log('>>>', process.env)
 
     if (process.env.NODE_ENV === 'development') {
         if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__) {

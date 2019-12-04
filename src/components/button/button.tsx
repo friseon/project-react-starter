@@ -1,42 +1,20 @@
-import * as React from 'react';
-import { connect, DispatchProp } from 'react-redux';
-import { click, IButtonState as F } from '../../store/reducers/button';
-import { State } from '../../store';
+import React, { FC } from 'react';
 
-import styles from './button.scss';
+import './Button.scss';
 
 interface IButtonProps {
+    mix?: string;
     text?: string;
-    buttonText?: string;
-    fieldValue?: string;
+    onClick?: any;
 }
 
-interface IButtonState {
-    text: string;
+export const Button: FC<IButtonProps> = (props: IButtonProps) => {
+    const { mix = '', onClick, text = 'Button'} = props;
+    const className = [String(mix), 'button'].join('');
+
+    return (
+        <button className={className} onClick={onClick}>
+            { text }
+        </button>
+    );
 }
-
-export class Button extends React.Component<DispatchProp & IButtonProps, IButtonState> {
-    handleClick = (event: React.FormEvent<HTMLButtonElement>) => {
-        const { dispatch } = this.props;
-        const value = this.props.fieldValue;
-
-        if (!value) {
-            return;
-        }
-
-        dispatch(click(value));
-    }
-
-    render() {
-        return (
-            <button className={styles.header} onClick={this.handleClick}>
-                { this.props.buttonText }
-            </button>
-        );
-    }
-}
-
-const mapStateToProps = (state: State, ownProps: IButtonProps) => ({
-});
-
-export default connect<{}, {}, IButtonProps>(mapStateToProps)(Button);

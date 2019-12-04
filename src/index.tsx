@@ -6,7 +6,11 @@ import { createAppStore } from './store';
 
 import { Application } from './components/application';
 
-const initialState = {};
+const initialState = {
+    counter: {
+        value: 0
+    }
+};
 
 const history = createBrowserHistory();
 const store = createAppStore(initialState, history);
