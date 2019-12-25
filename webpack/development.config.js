@@ -90,12 +90,12 @@ module.exports = {
                 test: /\.js$/,
                 enforce: "pre",
                 use: [
-                    {
-                        loader: 'cache-loader',
-                        options: {
-                            cacheDirectory: path.join(__dirname, "../node_modules", ".cache", "cache-loader")
-                        }
-                    },
+                    // {
+                    //     loader: 'cache-loader',
+                    //     options: {
+                    //         cacheDirectory: path.join(__dirname, "../node_modules", ".cache", "cache-loader")
+                    //     }
+                    // },
                     {
                         loader: 'babel-loader',
                         options: {
