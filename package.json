@@ -72,7 +72,7 @@
     "connected-react-router": "^6.6.1",
     "history": "^4.10.1",
     "immer": "^5.0.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-redux": "7.1.3",
